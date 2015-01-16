@@ -1,0 +1,55 @@
+{
+  "id": "jzx-weboo",
+  "kind": "Template",
+  "apiVersion": "v1beta1",
+  "name": "jzx-weboo",
+  "description": "Java deploy on openshift origin v3",
+  "parameters": [
+  ],
+  "items": [
+    {
+      "id": "jzx-weboo-frontend",
+      "kind": "Service",
+      "apiVersion": "v1beta1",
+      "port": 2606,
+      "containerPort": 8080,
+      "selector": {
+        "name": "jzx-weboo-frontend"
+      }
+    },
+    {
+      "id": "jzx-weboo-frontend",
+      "kind": "Deployment",
+      "apiVersion": "v1beta1",
+      "triggerPolicy": "manual",
+      "configId": "jzx-weboo-frontend-config",
+      "strategy": {
+        "type": "customPod",
+        "customPod": {
+          "image": "anderssv/jzx-weboo-docker-image"
+        }
+      },
+      "controllerTemplate": {
+        "replicas": 1,
+        "replicaSelector": {
+          "name": "jzx-weboo-frontend"
+        },
+        "podTemplate": {
+          "desiredState": {
+            "manifest": {
+              "version": "v1beta1",
+              "containers": [{
+                "name": "jzx-weboo",
+                "image": "127.0.0.1:5001/anderssv/jzx-weboo-docker-image",
+                "env": [
+                ],
+                "ports": [{"containerPort": 8080}]
+              }]
+            }
+          },
+          "labels": {"name": "jzx-weboo-frontend"}
+        }
+      }
+    }
+  ]
+}

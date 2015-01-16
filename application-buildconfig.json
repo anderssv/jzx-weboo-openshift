@@ -1,0 +1,13 @@
+{
+    "id": "build101",
+    "kind": "BuildConfig",
+    "apiVersion": "v1beta1",
+    "desiredInput":
+    {
+        "type":      "docker",
+        "sourceURI": "git://github.com/anderssv/jzx-weboo-docker-image.git",
+        "imageTag":  "anderssv/jzx-weboo-docker-image",
+        "registry":  "127.0.0.1:5001"
+    },
+    "secret": "secret101"
+}
