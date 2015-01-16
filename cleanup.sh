@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -eu
 
 echo "Killing openshift all-in-one server"
 killall openshift
